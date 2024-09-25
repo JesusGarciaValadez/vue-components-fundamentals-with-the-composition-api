@@ -16,20 +16,20 @@ const model = ref('')
 
 const input = useTemplateRef('my-input')
 
+const onKeyPress = (e) => {
+  if (e.key === '/') {
+    e.preventDefault()
+
+    input.value.input.focus()
+  }
+}
+
 onMounted(() => {
-  document.body.addEventListener('keypress', (e) => {
-    if (e.key === '/') {
-      input.value.input.focus()
-    }
-  })
+  document.body.addEventListener('keypress',onKeyPress )
 })
 
 onUnmounted(() => {
-  document.body.removeEventListener('keypress', (e) => {
-    if (e.key === '/') {
-      input.value.input.focus()
-    }
-  })
+  document.body.removeEventListener('keypress', onKeyPress)
 })
 
 const handleSearch = (value) => {
