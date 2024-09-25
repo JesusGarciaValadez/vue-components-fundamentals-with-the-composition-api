@@ -1,7 +1,8 @@
 <script setup>
 // import GithubCard from '@/components/GithubCard.vue'
 import AppAlert from '@/components/AppAlert.vue'
-import { ref } from 'vue'
+import MyInput from '@/components/MyInput.vue'
+import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
 
 // const usernames = ['danielkellyio', 'hootlex', 'MooseSaeed', 'JesusGarciaValadez']
 const alerts = ref([
@@ -10,6 +11,30 @@ const alerts = ref([
   { type: 'warning', message: 'Warning: Invalid email address.' },
   { type: 'error', message: 'Error! Task failed successully.' },
 ])
+
+const model = ref('')
+
+const input = useTemplateRef('my-input')
+
+onMounted(() => {
+  document.body.addEventListener('keypress', (e) => {
+    if (e.key === '/') {
+      input.value.input.focus()
+    }
+  })
+})
+
+onUnmounted(() => {
+  document.body.removeEventListener('keypress', (e) => {
+    if (e.key === '/') {
+      input.value.input.focus()
+    }
+  })
+})
+
+const handleSearch = (value) => {
+  model.value = value
+}
 </script>
 
 <template>
@@ -27,5 +52,10 @@ const alerts = ref([
     </app-alert>
 
     <pre>{{ alerts }}</pre>
+
+    <MyInput ref="my-input" :model="model" @update:model="handleSearch" />
+    <pre class="text-white">
+      {{ model }}
+    </pre>
   </div>
 </template>
