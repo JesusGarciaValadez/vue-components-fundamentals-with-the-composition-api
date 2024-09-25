@@ -18,7 +18,6 @@ defineExpose({
 const $emit = defineEmits(['update:model'])
 
 watch(_model, (value) => {
-  console.log('updateModel', value)
   $emit('update:model', value)
 })
 </script>
