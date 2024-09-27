@@ -1,5 +1,5 @@
 <script setup>
-import { ref, useTemplateRef, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   model: {
@@ -7,7 +7,7 @@ const props = defineProps({
     required: true,
   },
 })
-const input = useTemplateRef('my-input')
+const input = ref(null)
 const _model = ref(props.model)
 
 defineExpose({
@@ -22,5 +22,5 @@ watch(_model, (value) => {
 </script>
 
 <template>
-  <input type="text" v-model="_model" ref="my-input" />
+  <input type="text" v-model="_model" ref="input" />
 </template>
