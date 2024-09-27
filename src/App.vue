@@ -3,6 +3,7 @@
 import AppAlert from '@/components/AppAlert.vue'
 import MyInput from '@/components/MyInput.vue'
 import { onMounted, onUnmounted, ref } from 'vue'
+import MouseCoordinates from '@/components/MouseCoordinates.vue'
 
 // const usernames = ['danielkellyio', 'hootlex', 'MooseSaeed', 'JesusGarciaValadez']
 const alerts = ref([
@@ -34,6 +35,11 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <MouseCoordinates v-slot="{ x, y }">
+    <div class="fixed top-0 right-0 p-5 text-white">
+      <p>Mouse coordinates: {{ x }}, {{ y }}</p>
+    </div>
+  </MouseCoordinates>
   <!--GithubCard v-for="(username, index) in usernames"
               :key="`${username}-${index}`"
               :username="username"
