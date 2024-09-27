@@ -2,7 +2,7 @@
 // import GithubCard from '@/components/GithubCard.vue'
 import AppAlert from '@/components/AppAlert.vue'
 import MyInput from '@/components/MyInput.vue'
-import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 // const usernames = ['danielkellyio', 'hootlex', 'MooseSaeed', 'JesusGarciaValadez']
 const alerts = ref([
@@ -14,7 +14,7 @@ const alerts = ref([
 
 const model = ref('')
 
-const input = useTemplateRef('my-input')
+const input = ref(null)
 
 const onKeyPress = (e) => {
   if (e.key === '/') {
@@ -31,10 +31,6 @@ onMounted(() => {
 onUnmounted(() => {
   document.body.removeEventListener('keypress', onKeyPress)
 })
-
-const handleSearch = (value) => {
-  model.value = value
-}
 </script>
 
 <template>
@@ -53,7 +49,7 @@ const handleSearch = (value) => {
 
     <pre>{{ alerts }}</pre>
 
-    <MyInput ref="my-input" :model="model" @update:model="handleSearch" />
+    <MyInput v-model:model="model" ref="input" />
     <pre class="text-white">
       {{ model }}
     </pre>
