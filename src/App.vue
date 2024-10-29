@@ -12,10 +12,9 @@ const alerts = ref([
   { type: 'warning', message: 'Warning: Invalid email address.' },
   { type: 'error', message: 'Error! Task failed successully.' },
 ])
-
 const model = ref('')
-
 const input = ref(null)
+const screenSize = window.innerWidth
 
 const onKeyPress = (e) => {
   if (e.key === '/') {
@@ -38,6 +37,14 @@ onUnmounted(() => {
   <MouseCoordinates v-slot="{ x, y }">
     <div class="fixed top-0 right-0 p-5 text-white">
       <p>Mouse coordinates: {{ x }}, {{ y }}</p>
+    </div>
+    <div class="container">
+      <div class="left">
+        <button v-if="(screenSize / 2) < x">Left</button>
+      </div>
+      <div class="right">
+        <button v-if="(screenSize / 2) > x">Right</button>
+      </div>
     </div>
   </MouseCoordinates>
   <!--GithubCard v-for="(username, index) in usernames"
